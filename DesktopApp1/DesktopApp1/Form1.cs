@@ -106,7 +106,7 @@ Screen.PrimaryScreen.Bounds.Y, Cursor.Position.X, Cursor.Position.Y, Screen.Prim
             SendKeys.Send("{PRTSC}");
             Image myImage = Clipboard.GetImage();
             pictureBox1.Image = myImage;
-            myImage.Save("C:\\Users\\hassan\\Desktop\\Current_screen.jpg", ImageFormat.Jpeg)
+            myImage.Save("C:\\Users\\hassan\\Desktop\\Current_screen.jpg", ImageFormat.Jpeg);
             //Show Form
             this.Show();
         }
