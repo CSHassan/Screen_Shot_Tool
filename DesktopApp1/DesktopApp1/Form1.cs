@@ -17,9 +17,7 @@ namespace DesktopApp1
 {
     public partial class Form1 : Form
     {
-     
-
-
+        private Control panel1;
 
         public Form1()
         {
@@ -89,28 +87,30 @@ Screen.PrimaryScreen.Bounds.Y, Cursor.Position.X, Cursor.Position.Y, Screen.Prim
         //Current window screen shot
         private void button1_Click_2(object sender, EventArgs e)
         {
-            this.Hide();
-            System.Threading.Thread.Sleep(1000);
 
-            //Rectangle bounds = this.Bounds;
-            //using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
-            //{
-            //    using (Graphics g = Graphics.FromImage(bitmap))
-            //    {
-            //        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
-            //    }
-            //    bitmap.Save("C:\\Users\\hassan\\Desktop\\Current_screen.jpg", ImageFormat.Jpeg);
-            //}
+            SaveAsBitmap(panel1, "C:\\Users\\hassan\\Desktop\\Current_window_screen.jpg");
+
+           
 
 
-            SendKeys.Send("{PRTSC}");
-            Image myImage = Clipboard.GetImage();
-            pictureBox1.Image = myImage;
-            myImage.Save("C:\\Users\\hassan\\Desktop\\Current_screen.jpg", ImageFormat.Jpeg);
-            //Show Form
-            this.Show();
         }
-         
+
+        public void SaveAsBitmap(Control control, string fileName)
+        {
+            //get the instance of the graphics from the control
+            Graphics g = control.CreateGraphics();
+
+            //new bitmap object to save the image
+            Bitmap bmp = new Bitmap(control.Width, control.Height);
+
+            //Drawing control to the bitmap
+            control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
+
+            bmp.Save(fileName);
+            bmp.Dispose();
+
+        }
+
 
     }
 
